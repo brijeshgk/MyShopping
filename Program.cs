@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
+using System.IO;
+using System.Runtime.Remoting.Services;
+//using System.ComponentModel.Design;
+//using System.Diagnostics;
+//using System.IO;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using static System.Collections.Specialized.BitVector32;
 
 namespace Shopping
 {
@@ -19,15 +22,13 @@ namespace Shopping
 
         public static void ScreenSetup()
         {
-             
-            //while(Console.ReadKey().Key != ConsoleKey.Escape)
-            
+
 
             section section1 = new section { top = 1, bottom = Console.WindowHeight / 15, };
             section section2 = new section { top = (Console.WindowHeight / 15) + 1, bottom = Console.WindowHeight / 2, };
             section section3 = new section { top = (Console.WindowHeight /2 ) + 1, bottom = Console.WindowHeight, };
 
-            List<Item> list = new List<Item>();
+            List<Item> listOfItems = new List<Item>();
 
             string str=null;
             int numForItem=1001;
@@ -41,10 +42,29 @@ namespace Shopping
 
                 if (!(String.IsNullOrWhiteSpace(str) || String.IsNullOrEmpty(str))&& str!="quit")
                 {
-                    list.Add(new Item  { itemCode = numForItem,ItemName = str,price=30, availableQuantity=50, reStockDate=DateTime.Now.AddDays(4)});
+                    var item = new Item();
+                    item.ItemName = str;
+                    Console.WriteLine("Enter Selling Price:");
+                    item.price =Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter Quantity:");
+                    item.availableQuantity= Int32.Parse(Console.ReadLine());
+                    item.reStockDate = DateTime.Now.AddDays(4);
+                    item.itemCode = numForItem;
+                    
+                    //list.Add(new Item  { itemCode = numForItem,ItemName = str,price=30, availableQuantity=50, reStockDate=DateTime.Now.AddDays(4)});
+                    listOfItems.Add(item);
                     numForItem++;
                 }
             } while (str != "quit");
+
+            using (var streamWriter = new StreamWriter("C:\\Test\\Shopping\\Spreadsheet.csv", true))
+            {
+                streamWriter.WriteLine("Item Code,Item Name, Selling Price, Available Quantity,ReStock Date,Purchased Quantity");
+                foreach (var i in listOfItems)
+                    streamWriter.WriteLine(i.itemCode + "," + i.ItemName + "," + i.price + "," + i.availableQuantity + "," + i.reStockDate + "," + i.purchaseQuantity);
+            }
+
+            //using FileStream fs = new FileStream();
 
             
 
@@ -53,15 +73,16 @@ namespace Shopping
             do
             {
                 //BasicScreenRefresh(section s1, section s2, section s3)
-                BasicScreenRefresh(section1, section2, section3, list);
+                BasicScreenRefresh(section1, section2, section3, listOfItems);
                 Console.SetCursorPosition(0, section3.top + 1);
                 Console.WriteLine("Enter the item's code to buy from above list:");
+
                 purchaseItemCode= Console.ReadLine();
                 
                 if (Int32.TryParse(purchaseItemCode, out int code))
                 {
                    
-                    foreach (Item item in list)
+                    foreach (Item item in listOfItems)
                     {
                         if (code==item.itemCode)
                         {
@@ -75,10 +96,33 @@ namespace Shopping
                 }
                 
             }while (purchaseItemCode != "quit");
-            
-            foreach (Item item in purchaselist)
-                Console.WriteLine("Item Code:{0} \t Item Name:{1} \t Price:{2} \t Quantity:{3} \t AmtDue:{4}", item.itemCode,item.ItemName, item.price, item.purchaseQuantity, item.price* item.purchaseQuantity);
 
+            Console.WriteLine("Item Code  \t Price \t Quantity \t AmtDue\t Item Name");
+            Console.WriteLine("========================================================");
+            float total = 0;
+            foreach (Item item in purchaselist)
+            {
+                Console.WriteLine("{0} \t\t  {1} \t    {2} \t\t  {3} \t {4}", item.itemCode, item.price, item.purchaseQuantity,item.price * item.purchaseQuantity, item.ItemName);
+                total += item.price * item.purchaseQuantity;
+            }
+            Console.WriteLine("\t\tTotal:"+total);
+
+            //using (var streamWriter1 = new StreamWriter("C:\\Test\\Shopping\\Spreadsheet.csv", true))
+            //{
+            //    streamWriter1.WriteLine("New values being written, this is another, this what \n next line check?");
+            //}
+
+            //string sampleString;
+            //using (var streamReader = new StreamReader("C:\\Test\\Shopping\\Spreadsheet.csv"))
+            //{
+                
+            //    while (!String.IsNullOrEmpty (sampleString = streamReader.ReadLine()))
+            //    {
+                 
+            //        Console.WriteLine(sampleString);
+            //    }                                      
+
+            //}          
         }
 
         public static void BasicScreenRefresh(section s1, section s2, section s3, List<Item> l1 = null)
@@ -104,31 +148,27 @@ namespace Shopping
 
             if(l1 !=null)
             {
-                Console.WriteLine("[ItemCode] \t  [ItemName] \t [Price] \t [AvailableQuantity] \t [ReStock Date]");
-                for (int i = 0; i < l1.Count; i++)
-                    Console.WriteLine("[{0}] \t\t [{1}] \t [{2}] \t\t\t [{3}]\t \t [{4}]", l1[i].itemCode, l1[i].ItemName, l1[i].price, l1[i].availableQuantity, l1[i].reStockDate);
+                Console.WriteLine("[ItemCode] \t  [ItemName] \t [Price] \t [AvailableQuantity] \t [ReStock Date]  \t[Purchased Quantity]");
+                //for (int i = 0; i < l1.Count; i++)
+                //    Console.WriteLine("[{0}] \t\t [{1}] \t [{2}] \t\t\t [{3}]\t \t [{4}]", l1[i].itemCode, l1[i].ItemName, l1[i].price, l1[i].availableQuantity, l1[i].reStockDate, l1[i].purchaseQuantity);
+                var ignoreZerothLine = 0;
+                 using (var streamReader=new StreamReader("C:\\Test\\Shopping\\Spreadsheet.csv"))
+                {
+                    if (ignoreZerothLine==0)
 
+                    {
+                        //string 
+                        //streamReader.ReadLine()
+                    }
+                        {
+                    }
+                        
+                        ignoreZerothLine++;
+                }
             }
 
         }
         
-    }
-
-    public class section
-    {
-        public int top { get; set; }
-        public int bottom { get; set; }
-    }
-
-    public class Item
-    {
-        public int itemCode;
-        public string ItemName;
-        public float price;
-        public int availableQuantity;
-        public DateTime reStockDate;
-        public int purchaseQuantity=0;
-
     }
 
 }
