@@ -8,7 +8,7 @@ namespace Shopping
         public string ItemName;
         public float price;
         public int availableQuantity;
-        public DateTime reStockDate;
+        public string reStockDate;
         public int purchaseQuantity=0;
 
     }

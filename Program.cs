@@ -16,6 +16,21 @@ namespace Shopping
     {
         static void Main(string[] args)
         {
+            var fileaccess = new FileAccess();
+            fileaccess.FileReadAccess();
+            
+            Console.WriteLine("Input <Enter key> if satisfied with above Listings");
+
+            var newItem = Console.ReadLine();
+            if (newItem.Trim()!= null)
+
+            {
+
+                Console.WriteLine("successess");
+            }
+
+            
+            
 
             ScreenSetup();
         }
@@ -45,10 +60,10 @@ namespace Shopping
                     var item = new Item();
                     item.ItemName = str;
                     Console.WriteLine("Enter Selling Price:");
-                    item.price =Int32.Parse(Console.ReadLine());
+                    item.price =float.Parse(Console.ReadLine());
                     Console.WriteLine("Enter Quantity:");
                     item.availableQuantity= Int32.Parse(Console.ReadLine());
-                    item.reStockDate = DateTime.Now.AddDays(4);
+                    item.reStockDate = DateTime.Now.AddDays(4).ToString("dd/mm/yyyy");
                     item.itemCode = numForItem;
                     
                     //list.Add(new Item  { itemCode = numForItem,ItemName = str,price=30, availableQuantity=50, reStockDate=DateTime.Now.AddDays(4)});
@@ -148,27 +163,62 @@ namespace Shopping
 
             if(l1 !=null)
             {
-                Console.WriteLine("[ItemCode] \t  [ItemName] \t [Price] \t [AvailableQuantity] \t [ReStock Date]  \t[Purchased Quantity]");
+                Console.WriteLine("[ItemCode]  [Price]  [AvailableQuantity]  [ReStock Date]  [Purchased Quantity] [ItemName]");
                 //for (int i = 0; i < l1.Count; i++)
                 //    Console.WriteLine("[{0}] \t\t [{1}] \t [{2}] \t\t\t [{3}]\t \t [{4}]", l1[i].itemCode, l1[i].ItemName, l1[i].price, l1[i].availableQuantity, l1[i].reStockDate, l1[i].purchaseQuantity);
                 var ignoreZerothLine = 0;
+                string sampleString;
                  using (var streamReader=new StreamReader("C:\\Test\\Shopping\\Spreadsheet.csv"))
                 {
-                    if (ignoreZerothLine==0)
-
+                    while (!String.IsNullOrEmpty(sampleString = streamReader.ReadLine()))
                     {
-                        //string 
-                        //streamReader.ReadLine()
-                    }
+                        if (!(ignoreZerothLine == 0))
                         {
-                    }
-                        
+                            //char c = ','; 
+                            String[] strSplit =sampleString.Split(new char[] {','});
+                            Console.WriteLine("{0}         {1} \t     {2} \t\t   {3}\t\t{4}\t\t{5}",strSplit[0],float.Parse(strSplit[2]).ToString("0.00"),strSplit[3],strSplit[4],strSplit[5], strSplit[1]);
+                        }
                         ignoreZerothLine++;
+                    }             
+
                 }
             }
 
         }
         
+    }
+
+    public class FileAccess
+    {
+        public void FileReadAccess()
+        {
+            if (File.Exists("C:\\Test\\Shopping\\Spreadsheet.csv"))
+            {
+
+                Console.Clear();
+
+                Console.WriteLine("[ItemCode]  [Price]  [AvailableQuantity]  [ReStock Date]  [Purchased Quantity] [ItemName]");
+                //for (int i = 0; i < l1.Count; i++)
+                //    Console.WriteLine("[{0}] \t\t [{1}] \t [{2}] \t\t\t [{3}]\t \t [{4}]", l1[i].itemCode, l1[i].ItemName, l1[i].price, l1[i].availableQuantity, l1[i].reStockDate, l1[i].purchaseQuantity);
+                var ignoreZerothLine = 0;
+                string sampleString;
+                using (var streamReader = new StreamReader("C:\\Test\\Shopping\\Spreadsheet.csv"))
+                {
+                    while (!String.IsNullOrEmpty(sampleString = streamReader.ReadLine()))
+                    {
+                        if (!(ignoreZerothLine == 0))
+                        {
+                            //char c = ','; 
+                            String[] strSplit = sampleString.Split(new char[] { ',' });
+                            Console.WriteLine("{0}         {1} \t     {2} \t   {3}\t\t   {4}\t\t{5}", strSplit[0], float.Parse(strSplit[2]).ToString("0.00"), strSplit[3], strSplit[4], strSplit[5], strSplit[1]);
+                        }
+                        ignoreZerothLine++;
+                    }
+
+                }
+
+            }
+        }
     }
 
 }
