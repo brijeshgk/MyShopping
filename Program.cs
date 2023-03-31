@@ -16,18 +16,18 @@ namespace Shopping
     {
         static void Main(string[] args)
         {
-            var fileaccess = new FileAccess();
-            fileaccess.FileReadAccess();
+            //var fileaccess = new FileAccess();
+            //fileaccess.FileReadAccess();
             
-            Console.WriteLine("Input <Enter key> if satisfied with above Listings");
+            //Console.WriteLine("Input <Enter key> if satisfied with above Listings");
 
-            var newItem = Console.ReadLine();
-            if (newItem.Trim()!= null)
+            //var newItem = Console.ReadLine();
+            //if (newItem.Trim()!= null)
 
-            {
+            //{
 
-                Console.WriteLine("successess");
-            }
+            //    Console.WriteLine("successess");
+            //}
 
             
             
@@ -117,10 +117,11 @@ namespace Shopping
             float total = 0;
             foreach (Item item in purchaselist)
             {
-                Console.WriteLine("{0} \t\t  {1} \t    {2} \t\t  {3} \t {4}", item.itemCode, item.price, item.purchaseQuantity,item.price * item.purchaseQuantity, item.ItemName);
+                Console.WriteLine("{0} \t\t  {1} \t    {2} \t\t  {3} \t {4}", item.itemCode, item.price.ToString("0.00"), item.purchaseQuantity,(item.price * item.purchaseQuantity).ToString("000.00"), item.ItemName);
                 total += item.price * item.purchaseQuantity;
+                
             }
-            Console.WriteLine("\t\tTotal:"+total);
+            Console.WriteLine("\t\tTotal:"+total.ToString("0.00"));
 
             //using (var streamWriter1 = new StreamWriter("C:\\Test\\Shopping\\Spreadsheet.csv", true))
             //{
@@ -176,7 +177,7 @@ namespace Shopping
                         {
                             //char c = ','; 
                             String[] strSplit =sampleString.Split(new char[] {','});
-                            Console.WriteLine("{0}         {1} \t     {2} \t\t   {3}\t\t{4}\t\t{5}",strSplit[0],float.Parse(strSplit[2]).ToString("0.00"),strSplit[3],strSplit[4],strSplit[5], strSplit[1]);
+                            Console.WriteLine("{0}         {1} \t     {2} \t   {3}\t\t  {4}\t\t{5}",strSplit[0],float.Parse(strSplit[2]).ToString("0.00"),strSplit[3],strSplit[4],strSplit[5], strSplit[1]);
                         }
                         ignoreZerothLine++;
                     }             
@@ -210,7 +211,7 @@ namespace Shopping
                         {
                             //char c = ','; 
                             String[] strSplit = sampleString.Split(new char[] { ',' });
-                            Console.WriteLine("{0}         {1} \t     {2} \t   {3}\t\t   {4}\t\t{5}", strSplit[0], float.Parse(strSplit[2]).ToString("0.00"), strSplit[3], strSplit[4], strSplit[5], strSplit[1]);
+                            Console.WriteLine("{0}         {1} \t     {2}    {3}\t\t   {4}\t\t{5}", strSplit[0], float.Parse(strSplit[2]).ToString("0.00"), strSplit[3], strSplit[4], strSplit[5], strSplit[1]);
                         }
                         ignoreZerothLine++;
                     }
