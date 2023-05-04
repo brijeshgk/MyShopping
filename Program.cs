@@ -12,13 +12,13 @@ using System.Runtime.Remoting.Services;
 
 namespace Shopping
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             //var fileaccess = new FileAccess();
             //fileaccess.FileReadAccess();
-            
+
             //Console.WriteLine("Input <Enter key> if satisfied with above Listings");
 
             //var newItem = Console.ReadLine();
@@ -29,17 +29,18 @@ namespace Shopping
             //    Console.WriteLine("successess");
             //}
 
-            
-            
 
-            ScreenSetup();
+           var ssup = new ScreenSetUp(new ItemAddition(), new InputArea());
+            ssup.refreshingscreenandPrinting();
+
+            //ScreenSetup123();
         }
 
-        public static void ScreenSetup()
+        public static void ScreenSetup123()
         {
 
 
-            section section1 = new section { top = 1, bottom = Console.WindowHeight / 15, };
+/*            section section1 = new section { top = 1, bottom = Console.WindowHeight / 15, };
             section section2 = new section { top = (Console.WindowHeight / 15) + 1, bottom = Console.WindowHeight / 2, };
             section section3 = new section { top = (Console.WindowHeight /2 ) + 1, bottom = Console.WindowHeight, };
 
@@ -72,7 +73,7 @@ namespace Shopping
                 }
             } while (str != "quit");
 
-            using (var streamWriter = new StreamWriter("C:\\Test\\Shopping\\Spreadsheet.csv", true))
+            using (var streamWriter = new StreamWriter("C:\\GitRepos\\Shopping\\Spreadsheet.csv", true))
             {
                 streamWriter.WriteLine("Item Code,Item Name, Selling Price, Available Quantity,ReStock Date,Purchased Quantity");
                 foreach (var i in listOfItems)
@@ -121,7 +122,7 @@ namespace Shopping
                 total += item.price * item.purchaseQuantity;
                 
             }
-            Console.WriteLine("\t\tTotal:"+total.ToString("0.00"));
+            Console.WriteLine("\t\tTotal:"+total.ToString("0.00"));*/
 
             //using (var streamWriter1 = new StreamWriter("C:\\Test\\Shopping\\Spreadsheet.csv", true))
             //{
@@ -141,7 +142,7 @@ namespace Shopping
             //}          
         }
 
-        public static void BasicScreenRefresh(section s1, section s2, section s3, List<Item> l1 = null)
+/*        public static void BasicScreenRefresh(section s1, section s2, section s3, List<Item> l1 = null)
         {
             Console.Clear();
             for (int i = 0; i < Console.WindowWidth - 1; i++)
@@ -165,11 +166,10 @@ namespace Shopping
             if(l1 !=null)
             {
                 Console.WriteLine("[ItemCode]  [Price]  [AvailableQuantity]  [ReStock Date]  [Purchased Quantity] [ItemName]");
-                //for (int i = 0; i < l1.Count; i++)
-                //    Console.WriteLine("[{0}] \t\t [{1}] \t [{2}] \t\t\t [{3}]\t \t [{4}]", l1[i].itemCode, l1[i].ItemName, l1[i].price, l1[i].availableQuantity, l1[i].reStockDate, l1[i].purchaseQuantity);
+               
                 var ignoreZerothLine = 0;
                 string sampleString;
-                 using (var streamReader=new StreamReader("C:\\Test\\Shopping\\Spreadsheet.csv"))
+                 using (var streamReader=new StreamReader("C:\\GitRepos\\Shopping\\Spreadsheet.csv"))
                 {
                     while (!String.IsNullOrEmpty(sampleString = streamReader.ReadLine()))
                     {
@@ -185,7 +185,7 @@ namespace Shopping
                 }
             }
 
-        }
+        }*/
         
     }
 
@@ -193,7 +193,7 @@ namespace Shopping
     {
         public void FileReadAccess()
         {
-            if (File.Exists("C:\\Test\\Shopping\\Spreadsheet.csv"))
+            if (File.Exists("C:\\GitRepos\\Shopping\\Spreadsheet.csv"))
             {
 
                 Console.Clear();
@@ -203,7 +203,7 @@ namespace Shopping
                 //    Console.WriteLine("[{0}] \t\t [{1}] \t [{2}] \t\t\t [{3}]\t \t [{4}]", l1[i].itemCode, l1[i].ItemName, l1[i].price, l1[i].availableQuantity, l1[i].reStockDate, l1[i].purchaseQuantity);
                 var ignoreZerothLine = 0;
                 string sampleString;
-                using (var streamReader = new StreamReader("C:\\Test\\Shopping\\Spreadsheet.csv"))
+                using (var streamReader = new StreamReader("C:\\GitRepos\\Shopping\\Spreadsheet.csv"))
                 {
                     while (!String.IsNullOrEmpty(sampleString = streamReader.ReadLine()))
                     {

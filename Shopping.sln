@@ -5,6 +5,17 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping", "Shopping.csproj", "{9CBC6283-FCF9-4F7E-BEF1-F57BC2E471FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestForShopping", "UnitTestForShopping\UnitTestForShopping.csproj", "{5D293650-6A47-4229-BA3F-54857B491A19}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xunitProject", "xunitProject\xunitProject.csproj", "{20356892-B946-44F4-9AF7-B5286B5A414D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAPI", "..\CoreWebAPI\CoreAPI\CoreAPI.csproj", "{97F2B03F-7DCD-46A7-A318-2498D2995622}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{008AC3D1-08B8-4873-99F6-F779300AFD58}"
+	ProjectSection(SolutionItems) = preProject
+		..\GIT Cheatsheet.md = ..\GIT Cheatsheet.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +26,18 @@ Global
 		{9CBC6283-FCF9-4F7E-BEF1-F57BC2E471FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CBC6283-FCF9-4F7E-BEF1-F57BC2E471FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CBC6283-FCF9-4F7E-BEF1-F57BC2E471FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D293650-6A47-4229-BA3F-54857B491A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D293650-6A47-4229-BA3F-54857B491A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D293650-6A47-4229-BA3F-54857B491A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D293650-6A47-4229-BA3F-54857B491A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20356892-B946-44F4-9AF7-B5286B5A414D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20356892-B946-44F4-9AF7-B5286B5A414D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20356892-B946-44F4-9AF7-B5286B5A414D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20356892-B946-44F4-9AF7-B5286B5A414D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F2B03F-7DCD-46A7-A318-2498D2995622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F2B03F-7DCD-46A7-A318-2498D2995622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F2B03F-7DCD-46A7-A318-2498D2995622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F2B03F-7DCD-46A7-A318-2498D2995622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
